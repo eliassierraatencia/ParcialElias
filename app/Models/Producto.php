@@ -4,25 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Cliente extends Model
+class Producto extends Model
 {
-    protected $table = 'clientes';
+    protected $table = 'productos';
     
     protected $fillable = [
-        'nombre',
-        'telefono'
+        'descripcion',
+        'precio',
     ];
 
     public function facturas()
     {
-        return $this->hasMany('App\Models\Factura');
+        return $this->belongsToMany('App\Models\Factura','ventas','producto_id','factura_id')->withTimestamps();
     }
 
-    public function ubicacion()
-    {
-        return $this->hasOne('App\Models\Ubicacion');
-    }
-   
     public function calificaciones()
     {
         return $this->morphMany('App\Models\Calificacion', 'scoreable');

@@ -4,34 +4,27 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTablaFactura extends Migration
+class CrearTablaUbicaciones extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('facturas', function (Blueprint $table) {
+        Schema::create('ubicaciones', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('fecha');
+            $table->string('direccion');
+            $table->string('barrio');
+            $table->string('ciudad');
             $table->integer('cliente_id')->unsigned();
             $table->foreign('cliente_id')
             ->references('id')
-            ->on('clientes');
-            $table->integer('estado_factura');
+            ->on('clientes')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('facturas');
+        Schema::dropIfExists('ubicaciones');
     }
 }

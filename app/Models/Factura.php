@@ -10,37 +10,16 @@ class Factura extends Model
     
     protected $fillable = [
         'fecha',
-        'cliente_id',
-        'estado_factura'
+        'cliente_id'
     ];
-
-    protected $hidden = ['created_at', 'updated_at'];
-
-    protected $casts = [
-        'estado_factura' => 'boolean',
-    ];
-
-    protected $appends = ['info_cliente', 'info_venta'];
-
 
     public function cliente()
     {
         return $this->belongsTo('App\Models\Cliente');
     }
 
-    public function ventas()
+    public function productos()
     {
-        return $this->hasMany('App\Models\Venta');
+        return $this->belongsToMany('App\Models\Producto','ventas','factura_id','producto_id')->withTimestamps();
     }
-
-    public function getInfoClienteAttribute()
-    {
-        return $this->cliente;
-    }
-
-    public function getInfoVentaAttribute()
-    {
-        return $this->ventas;
-    }
-
 }

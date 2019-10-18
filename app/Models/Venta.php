@@ -10,26 +10,17 @@ class Venta extends Model
     
     protected $fillable = [
         'factura_id',
-        'producto',
-        'vendedor',
-        'cantidad'
+        'producto_id'
     ];
 
-    protected $hidden = ['created_at', 'updated_at'];
- 
-    protected $casts = [
-        'producto' => 'array',
-    ];
 
     public function factura()
     {
         return $this->belongsTo('App\Models\Factura');
     }
 
-    public function setVendedorAttribute($value)
+    public function producto()
     {
-        $this->attributes['vendedor'] = strtoupper($value);
+        return $this->belongsTo('App\Models\Producto');
     }
-
-
 }

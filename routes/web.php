@@ -11,8 +11,17 @@
 |
 */
 
-Route::get('/cliente', 'ClienteController@index');
-Route::get('/factura', 'FacturaController@index');
-Route::get('/venta', 'VentaController@index');
+Route::get('/', function () {
+    return view('welcome');
+});
 
 
+
+//Route::get('/cliente', 'ClienteController@index');
+//Route::post('/cliente', 'ClienteController@store');
+
+
+Route::resource('cliente', 'ClienteController');
+Route::resource('factura', 'FacturaController');
+Route::resource('producto', 'ProductoController');
+Route::resource('calificacion', 'CalificacionController');
